@@ -5,17 +5,45 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>ProjetoMinWeb</display-name>
 	<welcome-file-list>
-		<welcome-file>index.xhtml</welcome-file>
+		<welcome-file>login.xhtml</welcome-file>
 	</welcome-file-list>
+	
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.faces.FACELETS_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.myfaces.STRICT_JSF_2_CC_EL_RESOLVER</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.myfaces.CHECKED_VIEWID_CACHE_ENABLED</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>org.apache.myfaces.STRICT_JSF_2_REFRESH_TARGET_AJAX</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
 	<servlet>
 		<servlet-name>FacesServlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>FacesServlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	
 	<resource-ref>
 		<res-ref-name>jdbc/MinWebDB</res-ref-name>
 		<res-type>javax.sql.DataSource</res-type>
