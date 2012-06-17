@@ -202,7 +202,7 @@ public class DocumentNavigator extends DefaultNavigator implements
 	public Object getDocumentNode(Object contextNode) {
 		if (contextNode instanceof Source) {
 			Source source = (Source)contextNode;
-			return ((Segment)source).getAllElements("html").get(0);
+			return ((Segment)source).getAllElements("body").get(0);
 		} else {
 			return contextNode;
 		}
