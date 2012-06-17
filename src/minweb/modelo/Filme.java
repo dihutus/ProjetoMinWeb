@@ -34,7 +34,8 @@ public class Filme extends ObjetoBD {
 	private boolean dublado;
 	@ElementCollection
 	private List<Date> horarios;
-
+	@Basic
+	private LocalExibicao localExibicao;
 	
 	public String getTitulo() {
 		return titulo;
@@ -101,5 +102,12 @@ public class Filme extends ObjetoBD {
 	}
 	public void setHorarios(List<Date> horarios) {
 		this.horarios = horarios;
+	}
+	
+	public LocalExibicao getLocalExibicao() {
+		return localExibicao;
+	}
+	public void setLocalExibicao(LocalExibicao localExibicao) {
+		this.localExibicao = localExibicao;
 	}
 }
