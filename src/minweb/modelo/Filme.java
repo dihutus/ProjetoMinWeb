@@ -12,6 +12,8 @@ import minweb.base.modelo.ObjetoBD;
 
 @Entity
 public class Filme extends ObjetoBD {
+	private static final long serialVersionUID = 1573548980931094653L;
+	
 	@Basic
 	private String titulo;
 	@ElementCollection

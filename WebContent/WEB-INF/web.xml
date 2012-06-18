@@ -19,18 +19,13 @@
 	</context-param>
 	
 	<context-param>
-		<param-name>org.apache.myfaces.STRICT_JSF_2_CC_EL_RESOLVER</param-name>
-		<param-value>true</param-value>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
 	</context-param>
 	
 	<context-param>
-		<param-name>org.apache.myfaces.CHECKED_VIEWID_CACHE_ENABLED</param-name>
+		<param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
 		<param-value>false</param-value>
-	</context-param>
-	
-	<context-param>
-		<param-name>org.apache.myfaces.STRICT_JSF_2_REFRESH_TARGET_AJAX</param-name>
-		<param-value>true</param-value>
 	</context-param>
 	
 	<servlet>

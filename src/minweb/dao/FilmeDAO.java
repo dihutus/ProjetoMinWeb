@@ -13,10 +13,6 @@ import minweb.base.dao.DAO;
 import minweb.modelo.Filme;
 
 public class FilmeDAO extends DAO<Filme> {
-	public FilmeDAO() {
-		super(Filme.class);
-	}
-	
 	public List<Filme> getFilmesAfterDate(Date date) {
 		EntityManager em = newEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -24,8 +20,8 @@ public class FilmeDAO extends DAO<Filme> {
 		CriteriaQuery<Filme> query = cb.createQuery(Filme.class);
 		Root<Filme> filme = query.from(Filme.class);
 		Join<Filme, Date> join = filme.join("horarios");
-		CriteriaQuery<Filme> select = query.select(filme).where(cb.greaterThan(join, date)).distinct(true);
+		query.select(filme).where(cb.greaterThan(join, date)).distinct(true);
 		
-		return em.createQuery(select).getResultList();
+		return em.createQuery(query).getResultList();
 	}
 }
