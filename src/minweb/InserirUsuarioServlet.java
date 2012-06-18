@@ -17,7 +17,7 @@ public class InserirUsuarioServlet extends HttpServlet {
 	private static final long serialVersionUID = -1132939712512861733L;
 
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse res)
+	protected void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
 		Usuario user = new Usuario();
 		

@@ -8,18 +8,20 @@
 </h:head>
 <h:body>
 	<ui:composition>
-		<h:form id="formLogin">
-			<h:panelGroup layout="div" style="color: #c00;" rendered="#{loginBean.errorMessage != null}">
-				#{loginBean.errorMessage}
-			</h:panelGroup>
-			<h:panelGroup layout="div" rendered="#{usuarioBean.user == null}">
-				Login: <h:inputText value="#{loginBean.username}"/>
-				Senha: <h:inputSecret value="#{loginBean.password}"/>
-				<h:commandButton value="Logar" action="#{loginBean.logar}"/>
-			</h:panelGroup>
-			<h:panelGroup layout="div" rendered="#{usuarioBean.user != null}">
-				<h:commandButton value="Deslogar" action="#{loginBean.deslogar}"/>
-			</h:panelGroup>
+		<h:form>
+			<div id="divLogin">
+				<h:panelGroup layout="div" style="color: #c00;" rendered="#{loginBean.errorMessage != null}">
+					#{loginBean.errorMessage}
+				</h:panelGroup>
+				<h:panelGroup layout="div" rendered="#{usuarioBean.user == null}">
+					Login: <h:inputText value="#{loginBean.username}"/>
+					Senha: <h:inputSecret value="#{loginBean.password}"/>
+					<h:commandButton value="Logar" action="#{loginBean.logar}"/>
+				</h:panelGroup>
+				<h:panelGroup layout="div" rendered="#{usuarioBean.user != null}">
+					<h:commandButton value="Deslogar" action="#{loginBean.deslogar}"/>
+				</h:panelGroup>
+			</div>
 		</h:form>
 	</ui:composition>
 </h:body>

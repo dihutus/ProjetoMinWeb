@@ -23,4 +23,12 @@ public class UsuarioDAO extends DAO<Usuario> {
 		List<Usuario> users = em.createQuery(query).getResultList();
 		return (users.isEmpty()) ? null : users.get(0);
 	}
+
+	public List<Usuario> getUsers() {
+		EntityManager em = newEntityManager();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		
+		CriteriaQuery<Usuario> query = cb.createQuery(Usuario.class);
+		return em.createQuery(query.select(query.from(Usuario.class))).getResultList();
+	}
 }
