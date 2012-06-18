@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>ProjetoMinWeb</display-name>
 	<welcome-file-list>
-		<welcome-file>login.xhtml</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
