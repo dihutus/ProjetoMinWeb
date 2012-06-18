@@ -112,4 +112,9 @@ public class Filme extends ObjetoBD {
 	public void setLocalExibicao(LocalExibicao localExibicao) {
 		this.localExibicao = localExibicao;
 	}
+	
+	@Override
+	public String toString() {
+		return titulo + " " + ano;
+	}
 }

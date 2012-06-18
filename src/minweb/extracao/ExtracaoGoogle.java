@@ -127,7 +127,7 @@ public class ExtracaoGoogle {
 				}
 				filme.setHorarios(horarios);
 			} else if (result instanceof String) {
-				if(((String) result).endsWith("‎Verifique a Classificação‎‎ -")) {
+				if(((String) result).startsWith("‎Verifique a Classificação‎‎ -")) {
 					filme.setClassificaçãoEtaria("Não especificada");
 				} else if (((String) result).contains("anos")){
 					int i = ((String) result).indexOf("anos");
@@ -138,12 +138,12 @@ public class ExtracaoGoogle {
 					int i = ((String) result).indexOf('-');
 					if(i != -1) {
 						String nome = ((String) result).substring(0, i-1);
-						filme.setTitulo(nome);
+						filme.setTitulo(nome.replace("3D", "").trim());
 						boolean dublado = ((String) result).contains("Dublado");
 						filme.setDublado(dublado);
 					} else {
 						String nome = ((String) result);
-						filme.setTitulo(nome);
+						filme.setTitulo(nome.replace("3D", "").trim());
 						filme.setDublado(false);
 					}
 				}

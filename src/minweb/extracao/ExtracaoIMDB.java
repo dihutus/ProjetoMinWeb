@@ -21,9 +21,10 @@ import org.jaxen.jericho.JerichoXPath;
 public class ExtracaoIMDB {
 
 	private static String testUrl = "http://www.imdb.com/find";
+	private static String testUrl2 = "http://www.imdb.com";
 
 	private static String divMain = "//div[@id='main']";
-	private static String divMainTables = "//div[@id='main']/table/tr/td/a";
+	private static String divMainTables = "//div[@id='main']/table/tr/td/a[starts-with(@href, '/title/')]";
 
 	private static String ano = "//h1[@class='header']/span/a/text()";
 	private static String avaliacao = "//div[@itemprop='aggregateRating']/div[@class='star-box-giga-star']/text()";
@@ -58,13 +59,19 @@ public class ExtracaoIMDB {
 
 		if(result instanceof List) {
 			if (((List<?>) result).size() > 0) {
-				Element elt = (Element)((List<?>) result).get(0);
-				doc = elt.getSource();
-				doc.fullSequentialParse();
 				expr = new JerichoXPath(divMainTables);
 				result = expr.evaluate(doc);
 				if(result instanceof List) {
-					Element table = (Element)((List<?>) result).get(1);
+					Element table = (Element)((List<?>) result).get(0);
+					String link = table.getAttributeValue("href");
+					get = new HttpGet(testUrl2+ link);
+					response = client.execute(get);
+					entity = response.getEntity();
+					in = entity.getContent();
+					doc = new Source(in);
+					doc.fullSequentialParse();
+					
+					detalhesFilme(filme, doc);
 				}
 				
 				
@@ -78,6 +85,7 @@ public class ExtracaoIMDB {
 
 	private static void detalhesFilme(Filme filme, Source doc)
 			throws JaxenException {
+		System.out.println(filme.getTitulo());
 		XPath expr;
 		Object result;
 		expr = new JerichoXPath(ano);
@@ -151,7 +159,10 @@ public class ExtracaoIMDB {
 
 	public static void main(String[] args) {
 		try {
-			buscarFilmes(ExtracaoGoogle.extrairGoogle());
+			List<Filme> filmes= ExtracaoGoogle.extrairGoogle();
+			filmes = buscarFilmes(ExtracaoGoogle.extrairGoogle());
+			System.out.println("passou");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
