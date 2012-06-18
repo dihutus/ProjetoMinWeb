@@ -8,26 +8,35 @@ import javax.persistence.Persistence;
 import minweb.base.modelo.ObjetoBD;
 
 public abstract class DAO<T extends ObjetoBD> {
-	static EntityManagerFactory emf;
+	private static EntityManagerFactory emf;
+	private static EntityManager em;
 	
-	static void createFactory() {
+	static void init() {
 		if (emf == null) {
 			emf = Persistence.createEntityManagerFactory("minweb");
 		}
+		
+		if (em == null) {
+			em = emf.createEntityManager();
+		}
 	}
 	
-	static void destroyFactory() {
+	static void deinit() {
+		if (em != null) {
+			em.close();
+		}
+		
 		if (emf != null) {
 			emf.close();
 		}
 	}
 	
-	protected EntityManager newEntityManager() {
-		return emf.createEntityManager();
+	protected EntityManager getEntityManager() {
+		return em;
 	}
 	
 	public void persist(T obj) {
-		EntityManager em = newEntityManager();
+		EntityManager em = getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		
 		try {

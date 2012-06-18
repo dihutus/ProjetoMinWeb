@@ -2,7 +2,7 @@ package minweb.base.modelo;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
+import javax.persistence.Basic;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -12,7 +12,7 @@ public abstract class ObjetoBD implements Serializable {
 	private static final long serialVersionUID = -8186792048484445154L;
 	
 	@Id
-	@Column(nullable=false)
+	@Basic(optional=false)
 	@GeneratedValue
 	private Integer id;
 	

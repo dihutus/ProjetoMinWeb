@@ -24,7 +24,7 @@ public class LoginBean implements Serializable {
 	
 	private String errorMessage;
 	
-	@ManagedProperty(value="#{usuarioBean}")
+	@ManagedProperty("#{usuarioBean}")
 	private UsuarioBean usuarioBean;
 	
 	public void logar() {

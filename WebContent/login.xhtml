@@ -8,6 +8,7 @@
 </h:head>
 <h:body>
 	<ui:composition>
+		<h:outputStylesheet library="css" name="login.css"/>
 		<h:form>
 			<div id="divLogin">
 				<h:panelGroup layout="div" style="color: #c00;" rendered="#{loginBean.errorMessage != null}">
@@ -19,7 +20,9 @@
 					<h:commandButton value="Logar" action="#{loginBean.logar}"/>
 				</h:panelGroup>
 				<h:panelGroup layout="div" rendered="#{usuarioBean.user != null}">
-					<h:commandButton value="Deslogar" action="#{loginBean.deslogar}"/>
+					<h:commandLink styleClass="menu" action="/index.xhtml">Home</h:commandLink>
+					<h:commandLink styleClass="menu" action="/perfil.xhtml">Perfil</h:commandLink>
+					<h:commandButton styleClass="menu" value="Deslogar" action="#{loginBean.deslogar}"/>
 				</h:panelGroup>
 			</div>
 		</h:form>

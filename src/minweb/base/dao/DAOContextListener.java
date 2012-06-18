@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebListener;
 public class DAOContextListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
-		DAO.createFactory();
+		DAO.init();
 	}
 	
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
-		DAO.destroyFactory();
+		DAO.deinit();
 	}
 }

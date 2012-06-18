@@ -14,7 +14,7 @@ import minweb.modelo.Filme;
 
 public class FilmeDAO extends DAO<Filme> {
 	public List<Filme> getFilmesAfterDate(Date date) {
-		EntityManager em = newEntityManager();
+		EntityManager em = getEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		
 		CriteriaQuery<Filme> query = cb.createQuery(Filme.class);

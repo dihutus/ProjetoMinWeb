@@ -1,12 +1,14 @@
 package minweb.modelo;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+
+import com.google.common.collect.Sets;
 
 import minweb.base.modelo.ObjetoBD;
 
@@ -20,9 +22,10 @@ public class Usuario extends ObjetoBD {
 	@Basic(optional=false)
 	private String password;
 	
-	@ElementCollection(fetch=FetchType.LAZY)
-	private List<String> generos;
-
+	@Column(nullable=false)
+	@ElementCollection(fetch=FetchType.EAGER)
+	private Set<String> generos = Sets.newHashSet();
+	
 	public String getUsername() {
 		return username;
 	}
@@ -37,10 +40,10 @@ public class Usuario extends ObjetoBD {
 		this.password = password;
 	}
 	
-	public List<String> getGeneros() {
+	public Set<String> getGeneros() {
 		return generos;
 	}
-	public void setGeneros(List<String> generos) {
+	public void setGeneros(Set<String> generos) {
 		this.generos = generos;
 	}
 }
