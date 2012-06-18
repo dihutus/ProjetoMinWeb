@@ -136,10 +136,16 @@ public class ExtracaoGoogle {
 					filme.setClassificaçãoEtaria("Livre");
 				} else {
 					int i = ((String) result).indexOf('-');
-					String nome = ((String) result).substring(0, i-1);
-					boolean dublado = ((String) result).endsWith("Dublado");
-					filme.setTitulo(nome);
-					filme.setDublado(dublado);
+					if(i != -1) {
+						String nome = ((String) result).substring(0, i-1);
+						filme.setTitulo(nome);
+						boolean dublado = ((String) result).contains("Dublado");
+						filme.setDublado(dublado);
+					} else {
+						String nome = ((String) result);
+						filme.setTitulo(nome);
+						filme.setDublado(false);
+					}
 				}
 			}
 		}
