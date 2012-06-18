@@ -1,20 +1,18 @@
 package minweb.modelo;
 
 import javax.persistence.Basic;
-import javax.persistence.Entity;
+import javax.persistence.Embeddable;
 
-import minweb.base.modelo.ObjetoBD;
-
-@Entity
-public class LocalExibicao extends ObjetoBD {
+@Embeddable
+public class LocalExibicao {
 	public enum TipoLocal {
 		CINEMA,
 		TV
 	}
 	
-	@Basic(optional=false)
+	@Basic
 	private String local;
-	@Basic(optional=false)
+	@Basic
 	private TipoLocal tipo;
 	
 	public LocalExibicao(String local, TipoLocal tipo) {

@@ -1,1 +1,2 @@
-WebContent/WEB-INF/classes
+.metadata/*
+WebContent/WEB-INF/classes/*
