@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Perfil do Usuário</title>
+</h:head>
+<h:body>
+	<ui:include src="/login.xhtml"/>
+	<h:form id="formPerfil">
+		<h:panelGrid columns="3">
+			<h:column>
+				<h:selectOneListbox style="width: 10em;" size="10"
+					value="#{perfilUsuarioBean.generoSelecionado}">
+					<f:selectItems value="#{perfilUsuarioBean.generosDisponiveis}"/>
+				</h:selectOneListbox>
+			</h:column>
+			<h:column>
+				<h:commandButton style="display: block;" value="&gt;"
+					action="#{perfilUsuarioBean.adicionarGenero}"/>
+				<h:commandButton style="display: block;" value="&lt;"
+					action="#{perfilUsuarioBean.removerGenero}"/>
+			</h:column>
+			<h:column>
+				<h:selectOneListbox style="width: 10em;" size="10"
+					value="#{perfilUsuarioBean.generoUsuarioSelecionado}">
+					<f:selectItems value="#{usuarioBean.user.generos}"/>
+				</h:selectOneListbox>
+			</h:column>
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>

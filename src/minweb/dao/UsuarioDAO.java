@@ -12,7 +12,7 @@ import minweb.modelo.Usuario;
 
 public class UsuarioDAO extends DAO<Usuario> {
 	public Usuario getUser(String username) {
-		EntityManager em = newEntityManager();
+		EntityManager em = getEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		
 		CriteriaQuery<Usuario> query = cb.createQuery(Usuario.class);
@@ -25,7 +25,7 @@ public class UsuarioDAO extends DAO<Usuario> {
 	}
 
 	public List<Usuario> getUsers() {
-		EntityManager em = newEntityManager();
+		EntityManager em = getEntityManager();
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		
 		CriteriaQuery<Usuario> query = cb.createQuery(Usuario.class);
