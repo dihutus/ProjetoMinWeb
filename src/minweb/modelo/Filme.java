@@ -24,8 +24,8 @@ public class Filme extends ObjetoBD {
 	private List<String> elenco;
 	@ElementCollection
 	private List<String> diretores;
-	@Basic
-	private int avaliação;
+	@Basic(optional=false)
+	private double avaliação;
 	@Basic
 	private int ano;
 	@Basic
@@ -55,7 +55,7 @@ public class Filme extends ObjetoBD {
 	public List<String> getDiretores() {
 		return diretores;
 	}
-	public int getAvaliação() {
+	public double getAvaliação() {
 		return avaliação;
 	}
 	public int getAno() {
@@ -88,7 +88,7 @@ public class Filme extends ObjetoBD {
 	public void setDiretores(List<String> diretores) {
 		this.diretores = diretores;
 	}
-	public void setAvaliação(int avaliação) {
+	public void setAvaliação(double avaliação) {
 		this.avaliação = avaliação;
 	}
 	public void setAno(int ano) {
