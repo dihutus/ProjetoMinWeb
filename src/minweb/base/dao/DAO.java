@@ -28,9 +28,9 @@ public abstract class DAO<T extends ObjetoBD> {
 		CriteriaQuery<T> cq = cb.createQuery(targetClass);
 		
 		Root<T> target = cq.from(targetClass);
-		cq.select(target).where(cb.equal(target.get("id"), id));
+		CriteriaQuery<T> select = cq.select(target).where(cb.equal(target.get("id"), id));
 		
-		return em.createQuery(cq).getSingleResult();
+		return em.createQuery(select).getSingleResult();
 	}
 	
 	public void persist(T obj) {

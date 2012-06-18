@@ -5,18 +5,18 @@ import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 
 import minweb.base.modelo.ObjetoBD;
 
 @Entity
 public class Filme extends ObjetoBD {
-	
-	@Basic(optional=false)
+	@Basic
 	private String titulo;
 	@ElementCollection
 	private List<String> generos;
-	@Basic(optional=false)
+	@Basic
 	private String classificaçãoEtaria;
 	@Basic
 	private String resumo;
@@ -24,7 +24,7 @@ public class Filme extends ObjetoBD {
 	private List<String> elenco;
 	@ElementCollection
 	private List<String> diretores;
-	@Basic(optional=false)
+	@Basic
 	private int avaliação;
 	@Basic
 	private int ano;
@@ -34,7 +34,7 @@ public class Filme extends ObjetoBD {
 	private boolean dublado;
 	@ElementCollection
 	private List<Date> horarios;
-	@Basic
+	@Embedded
 	private LocalExibicao localExibicao;
 	
 	public String getTitulo() {
