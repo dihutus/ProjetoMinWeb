@@ -40,20 +40,20 @@ public class ExtracaoHagah {
 	private static final String URL_HAGAH_TV = "http://www.hagah.com.br/programacao-tv/jsp/";
 	private static final String URL_HAGAH_TV_PAGINA = "default.jsp?uf=26&operadora=15&genero=Filme";
 	
-	private final XPath xpath_trs_emissoras =
+	private static final XPath xpath_trs_emissoras =
 			newXPath("//table[@id='grupo1']/tbody/tr[not(contains(@class, 'limpa'))]");
-	private final XPath xpath_nome_emissora =
+	private static final XPath xpath_nome_emissora =
 			newXPath("string(td[contains(@class, 'nome')]/a)");
-	private final XPath xpath_filmes =
+	private static final XPath xpath_filmes =
 			newXPath("td[contains(@class, 'programa')][contains(@class, 'filme')]/a[@title]/@href");
 	
-	private final XPath xpath_div_filme =
+	private static final XPath xpath_div_filme =
 			newXPath("//div[contains(@class, 'conteudo')][1]");
-	private final XPath xpath_nome_filme =
+	private static final XPath xpath_nome_filme =
 			newXPath("string(h1[contains(@class, 'programa')])");
-	private final XPath xpath_data_filme =
+	private static final XPath xpath_data_filme =
 			newXPath("string(ul[contains(@class, 'horario')]/li[1])");
-	private final XPath xpath_horario_filme =
+	private static final XPath xpath_horario_filme =
 			newXPath("string(ul[contains(@class, 'horario')]/li[2])");
 
 	
@@ -66,7 +66,7 @@ public class ExtracaoHagah {
 		}
 	}
 	
-	private Filme extrairFilme(String emissora, String url) {
+	private static Filme extrairFilme(String emissora, String url) {
 		try {
 			StringBuilder sb = new StringBuilder();
 			
@@ -88,8 +88,12 @@ public class ExtracaoHagah {
 				Calendar cal = Calendar.getInstance(PT_BR);
 				Calendar temp = Calendar.getInstance(PT_BR);
 				
-				Date data = new SimpleDateFormat("'Data: 'EEEEEEEE' - 'dd' de 'MMMMM' | '", PT_BR).parse((String)xpath_data_filme.evaluate(div));
-				Date horario;
+				String tempS = (String)xpath_data_filme.evaluate(div);
+				if(tempS.contains("Segunda")){
+					tempS = tempS.substring(0, 13) + "-Feira" + tempS.substring(13);
+				}
+				Date data = new SimpleDateFormat("'Data: 'EEEEEEEE' - 'dd' de 'MMMMM' | '", PT_BR).parse(tempS);
+				Date horario; 
 				try {
 					horario = new SimpleDateFormat("'Início: 'HH'h'mm' | '", PT_BR).parse((String)xpath_horario_filme.evaluate(div));
 				} catch (ParseException pex) {
@@ -97,7 +101,7 @@ public class ExtracaoHagah {
 				}
 
 				temp.setTime(data);
-				cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));
+				cal.set(Calendar.DAY_OF_WEEK, cal.get(Calendar.DAY_OF_WEEK));	
 				cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH));
 				cal.set(Calendar.MONTH, cal.get(Calendar.MONTH));
 				
@@ -117,7 +121,7 @@ public class ExtracaoHagah {
 		}
 	}
 
-	private InputStream readUrl(String url) throws IOException, ClientProtocolException {
+	private static InputStream readUrl(String url) throws IOException, ClientProtocolException {
 		HttpClient client = new DefaultHttpClient();
 		HttpGet get = new HttpGet(url);
 		HttpResponse response = client.execute(get);
@@ -126,7 +130,7 @@ public class ExtracaoHagah {
 		return in;
 	}
 
-	public List<Filme> extrair(Date date) throws ClientProtocolException, JaxenException, IOException {
+	public static List<Filme> extrair(Date date) throws ClientProtocolException, JaxenException, IOException {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(URL_HAGAH_TV).append(URL_HAGAH_TV_PAGINA);

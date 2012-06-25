@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -21,6 +22,7 @@ public class Filme extends ObjetoBD {
 	@Basic
 	private String classificaçãoEtaria;
 	@Basic
+	@Column(columnDefinition="VARCHAR(1000)")
 	private String resumo;
 	@ElementCollection
 	private List<String> elenco;
@@ -116,5 +118,15 @@ public class Filme extends ObjetoBD {
 	@Override
 	public String toString() {
 		return titulo + " " + ano;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Filme){
+			Filme f = (Filme)obj;
+			return this.titulo.equals(f.getTitulo()) && 
+					this.localExibicao.getLocal().equals(f.getLocalExibicao().getLocal());
+		}
+		return false;
 	}
 }

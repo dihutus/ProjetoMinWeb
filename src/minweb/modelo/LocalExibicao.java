@@ -15,6 +15,9 @@ public class LocalExibicao {
 	@Basic
 	private TipoLocal tipo;
 	
+	public LocalExibicao() {
+	}
+	
 	public LocalExibicao(String local, TipoLocal tipo) {
 		this.local = local;
 		this.tipo = tipo;

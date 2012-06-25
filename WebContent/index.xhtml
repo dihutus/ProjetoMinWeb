@@ -9,7 +9,22 @@
 <h:body>
 	<ui:include src="/login.xhtml"/>
 	<h:form id="formContent">
-		Trololo Bitches
+		<h:dataTable value="#{indexBean.filmes}" var="filme">
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				#{filme.titulo}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Local</f:facet>
+				#{filme.localExibicao.tipo} - #{filme.localExibicao.local}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Horário</f:facet>
+				<ui:repeat value="#{filme.horarios}" var="horario">
+					#{horario} 
+				</ui:repeat>
+			</h:column>
+		</h:dataTable>
 	</h:form>
 </h:body>
 </html>

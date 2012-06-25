@@ -37,7 +37,12 @@ public class ExtracaoIMDB {
 
 		List<Filme> retorno = new ArrayList<Filme>();
 		for(Filme fil: filmes) {
-			retorno.add(buscarFilme(fil));
+			try {
+				retorno.add(buscarFilme(fil));
+			} catch (Exception e) {
+				System.out.println("deu erro no filme : "+ fil.getTitulo());
+				e.printStackTrace();
+			}
 		}
 		return retorno;
 	}
@@ -46,7 +51,8 @@ public class ExtracaoIMDB {
 
 		HttpClient client = new DefaultHttpClient();
 		URIBuilder builder = new URIBuilder(testUrl);
-		builder.addParameter("q", filme.getTitulo());
+		String titulo = filme.getTitulo().replace("?", "");
+		builder.addParameter("q", titulo);
 		builder.addParameter("s", "all");
 		HttpGet get = new HttpGet(builder.build());
 		HttpResponse response = client.execute(get);
@@ -85,7 +91,6 @@ public class ExtracaoIMDB {
 
 	private static void detalhesFilme(Filme filme, Source doc)
 			throws JaxenException {
-		System.out.println(filme.getTitulo());
 		XPath expr;
 		Object result;
 		expr = new JerichoXPath(ano);
@@ -154,17 +159,6 @@ public class ExtracaoIMDB {
 			expr = new JerichoXPath(resumo);
 			result = expr.evaluate(doc);
 			filme.setResumo((String)result);
-		}
-	}
-
-	public static void main(String[] args) {
-		try {
-			List<Filme> filmes= ExtracaoGoogle.extrairGoogle();
-			filmes = buscarFilmes(ExtracaoGoogle.extrairGoogle());
-			System.out.println("passou");
-			
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 }
